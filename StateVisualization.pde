@@ -5,9 +5,11 @@ Table data;
 int rowCount;
 float dataMin = MAX_FLOAT;
 float dataMax = MIN_FLOAT;
+Scale scale;
+PFont f;
 
 void setup() {
-	size(640, 480);
+	f = createFont("Arial", 10, true);
 
 	// Get the data
 	data = new Table("nestegg-index");
@@ -19,7 +21,8 @@ void setup() {
 	// ps = new PShapeSVG(xml);
 
 	test = loadShape("Blank_US_Map.svg");
-	size(int(test.width), int(test.height));
+	size(int(test.width) + 20, int(test.height) + 20);
+	println("Width: " + test.width + " Height: " + test.height);
 
 	// Find the minimum and maximum data values
 	for (int row = 0; row < rowCount; row++) {
@@ -32,6 +35,8 @@ void setup() {
 		}
 	}
 
+	scale = new Scale(dataMin, dataMax);
+
 }
 
 
@@ -43,7 +48,8 @@ void draw() {
 	stroke(#D9D9D9); //stroke(#2CA25F);
 
 	fill(#f2f2f2);
-	rect(10, 10, width-20, height-20);
+	rectMode(CENTER);
+	rect(width/2, test.height/2 + 10, test.width, test.height);
 
 	smooth();
 	fill(0);
@@ -65,22 +71,15 @@ void draw() {
 			color c = lerpColor(#E5F5F9, #2CA25F, amt);
 			fill(c);
 
-			shape(state, (width*.125), 75, width - (width*.25), height - (height*.25));
+			shape(state, (test.width*.125), 75, test.width - (test.width*.25), test.height - (test.height*.25));
 			//shape(state, 0, 0);
 		}
 	}
 
-
-	int x = width - 200;
-	int y = height - 50;
-	for(float i = dataMin; i <= dataMax; i += 1.0) {
-		color c = lerpColor(#E5F5F9, #2CA25F, norm(i, dataMin, dataMax));
-		fill(c);
-		noStroke();
-		rect(x, y, 5, 25);
-		x += 5;
-	}
-
+	// Draw the scale
+	int x = int(test.width) - 175;
+	int y = int(test.height) - 25;
+	scale.draw(x, y);
 }
 
 void bindSVG(XML svg) {
@@ -99,4 +98,48 @@ void bindSVG(XML svg) {
 			println("Caught an error");
 		}		
 	}
+}
+
+
+class Scale {
+	float min, max;
+	int x, y;
+
+	Scale(float dataMin, float dataMax){
+		min = dataMin;
+		max = dataMax;
+	}
+
+	void draw(int startx, int starty){
+		x = startx;
+		y = starty;
+
+		// Draw text markings
+		drawText(""+dataMin, x+10, y-25);
+
+		// Draw the scale image
+		for(float i = dataMin; i <= dataMax; i += 1.0) {
+			color c = lerpColor(#E5F5F9, #2CA25F, norm(i, dataMin, dataMax));
+			fill(c);
+			stroke(c);
+			rect(x, y, 5, 25);
+			x += 5;
+		}
+
+		// Draw text markings
+		drawText(""+dataMax, x, y-25);
+
+	}
+
+	void drawText(String text, int x, int y){
+		pushMatrix();
+		translate(x, y);
+		rotate(radians(-45));
+		fill(0);
+		textFont(f);
+		textSize(10);
+		text(text, 0, 0);
+		popMatrix();
+	}
+
 }
