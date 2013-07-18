@@ -27,6 +27,11 @@ float dataMax = MIN_FLOAT;
 //Scale scale;
 PFont f;
 
+float overlayX;
+float overlayY;
+String overlayCode;
+float overlayValue;
+
 public void setup() {
 	f = createFont("Arial", 10, true);
 	textFont(f);
@@ -62,6 +67,11 @@ public void setup() {
 public void draw() {
 
 	background(0xffffffff);
+
+	// Don't display an overlay by default
+	overlayValue = 0;
+
+
 
 	// strokeWeight(1);
 	// stroke(#D9D9D9); //stroke(#2CA25F);
@@ -108,24 +118,32 @@ public void draw() {
 		if(states.children[i].contains(p)) {
 			RPoint center = state.getCenter();
 
+			// Draw the state shape in mouseover state
 			RG.ignoreStyles(true);
-
 			pushMatrix();
 			stroke(10,10,10,150);
 			strokeWeight(1);
 			state.draw();
 			popMatrix();
-			
-			//text overlay
-			strokeWeight(1);
-			fill(10,10,10,150);
-			rectMode(CENTER);
-			rect(center.x, center.y, 75, 30);
-			fill(255);
-			textSize(10);
-			textAlign(CENTER);
-			text(code + " " + value, center.x, center.y+5);
+
+			// Figure out values for the overlay
+			overlayX = center.x;
+			overlayY = center.y;
+			overlayCode = code;
+			overlayValue = value;
 		}
+	}
+
+	// Draw the text overlay if there's a value to display
+	if(overlayValue > 0) {
+		strokeWeight(1);
+		fill(10,10,10,150);
+		rectMode(CENTER);
+		rect(overlayX, overlayY, 75, 30);
+		fill(255);
+		textSize(10);
+		textAlign(CENTER);
+		text(overlayCode + " " + overlayValue, overlayX, overlayY+5);
 	}
 
 
