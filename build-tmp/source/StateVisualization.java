@@ -24,15 +24,17 @@ Table data;
 int rowCount;
 float dataMin = MAX_FLOAT;
 float dataMax = MIN_FLOAT;
-//Scale scale;
-PFont f;
 
+ColorScale cscale;
+
+PFont f;
 float overlayX;
 float overlayY;
 String overlayCode;
 float overlayValue;
 
 public void setup() {
+	// Setup the font
 	f = createFont("Arial", 10, true);
 	textFont(f);
 
@@ -51,45 +53,59 @@ public void setup() {
 		}
 	}
 
-	// // Create a scale object
-	// scale = new Scale(dataMin, dataMax);
+	// Create a scale object
+	cscale = new ColorScale(dataMin, dataMax);
 
 	// Create a Geomerative shape
 	RG.init(this);
 	us = RG.loadShape("Blank_US_Map.svg");
 
 	// Set the size of the window
-	size(PApplet.parseInt(us.width), PApplet.parseInt(us.height));
-
+	size(PApplet.parseInt(us.width*1.2f), PApplet.parseInt(us.height*1.1f));
 }
 
 
 public void draw() {
 
+	// Clear the screen
 	background(0xffffffff);
 
 	// Don't display an overlay by default
 	overlayValue = 0;
 
+	// Draw a rectange around the graphic
+	pushStyle();
+	strokeWeight(1);
+	stroke(0xffD9D9D9);
+	fill(0xfff2f2f2);
+	rectMode(CENTER);
+	rect(width/2, height/2, width-20, height-20);
+	popStyle();
 
+	// Draw the Heading
+	smooth();
+	fill(0);
+	textSize(35);
+	textAlign(CENTER);
+	text("2012 U.S. Savings by State", width/2, 50);
 
-	// strokeWeight(1);
-	// stroke(#D9D9D9); //stroke(#2CA25F);
+	// Draw the Source Text
+	fill(0xff777777);
+	textSize(10);
+	textAlign(LEFT);
+	text("Source: A.G. Edwards Nest Egg Index", 15, height-15);
 
-	// // Draw a rectange around the graphic
-	// fill(#f2f2f2);
-	// rectMode(CENTER);
-	// rect(width/2, test.height/2 + 10, test.width, test.height);
+	// Draw the scale
+	cscale.draw(PApplet.parseInt(us.width)/2+60, PApplet.parseInt(us.height)-15);
 
-	// // Heading
-	// smooth();
-	// fill(0);
-	// textSize(35);
-	// textAlign(CENTER);
-	// text("U.S. Savings by State", width/2, 50);
+	pushMatrix();
+
+	// Translate the drawing of the map
+	translate(10, 25);
 
 	// Get the location of the mouse
 	RPoint p = new RPoint(mouseX, mouseY);
+	p.translate(-10, -25);
 
 	// Iterate through the states shapes
 	RShape states = us.children[0];
@@ -120,11 +136,9 @@ public void draw() {
 
 			// Draw the state shape in mouseover state
 			RG.ignoreStyles(true);
-			pushMatrix();
 			stroke(10,10,10,150);
 			strokeWeight(1);
 			state.draw();
-			popMatrix();
 
 			// Figure out values for the overlay
 			overlayX = center.x;
@@ -136,6 +150,7 @@ public void draw() {
 
 	// Draw the text overlay if there's a value to display
 	if(overlayValue > 0) {
+		pushStyle();
 		strokeWeight(1);
 		fill(10,10,10,150);
 		rectMode(CENTER);
@@ -144,58 +159,56 @@ public void draw() {
 		textSize(10);
 		textAlign(CENTER);
 		text(overlayCode + " " + overlayValue, overlayX, overlayY+5);
+		popStyle();
 	}
 
-
-	// Draw the scale
-	// int x = int(test.width) - 175;
-	// int y = int(test.height) - 25;
-	// scale.draw(x, y);
+	popMatrix();
 }
 
 
-// class Scale {
-// 	float min, max;
-// 	int x, y;
+class ColorScale {
+	float min, max;
+	int x, y;
 
-// 	Scale(float dataMin, float dataMax){
-// 		min = dataMin;
-// 		max = dataMax;
-// 	}
+	ColorScale(float dataMin, float dataMax){
+		min = dataMin;
+		max = dataMax;
+	}
 
-// 	void draw(int startx, int starty){
-// 		x = startx;
-// 		y = starty;
+	public void draw(int startx, int starty){
+		x = startx;
+		y = starty;
 
-// 		// Draw text markings
-// 		drawText(""+dataMin, x+10, y-25);
+		// Draw text markings
+		drawText(""+dataMin, x, y-3, LEFT);
 
-// 		// Draw the scale image
-// 		for(float i = dataMin; i <= dataMax; i += 1.0) {
-// 			color c = lerpColor(#E5F5F9, #2CA25F, norm(i, dataMin, dataMax));
-// 			fill(c);
-// 			stroke(c);
-// 			rect(x, y, 5, 25);
-// 			x += 5;
-// 		}
+		// Draw the scale image
+		for(float i = dataMin; i <= dataMax; i += 1.0f) {
+			int c = lerpColor(0xffE5F5F9, 0xff2CA25F, norm(i, dataMin, dataMax));
+			fill(c);
+			stroke(c);
+			rect(x, y, 5, 25);
+			x += 5;
+		}
 
-// 		// Draw text markings
-// 		drawText(""+dataMax, x, y-25);
+		// Draw text markings
+		drawText(""+dataMax, x, y-3, RIGHT);
 
-// 	}
+	}
 
-// 	void drawText(String text, int x, int y){
-// 		pushMatrix();
-// 		translate(x, y);
-// 		rotate(radians(-45));
-// 		fill(0);
-// 		textFont(f);
-// 		textSize(10);
-// 		text(text, 0, 0);
-// 		popMatrix();
-// 	}
+	public void drawText(String text, int x, int y, int alignment){
+		pushMatrix();
+		translate(x, y);
+		//rotate(radians(-45));
+		fill(0);
+		textFont(f);
+		textSize(10);
+		textAlign(alignment);
+		text(text, 0, 0);
+		popMatrix();
+	}
 
-// }
+}
 class Table {
   int rowCount;
   String[][] data;
