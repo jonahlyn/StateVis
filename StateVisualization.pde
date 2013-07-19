@@ -1,4 +1,3 @@
-//import processing.xml.*;
 import geomerative.*;
 
 RShape us;
@@ -6,19 +5,20 @@ Table data;
 int rowCount;
 float dataMin = MAX_FLOAT;
 float dataMax = MIN_FLOAT;
-
 ColorScale cscale;
-
 PFont f;
 float overlayX;
 float overlayY;
 String overlayCode;
 float overlayValue;
+String description;
 
 void setup() {
 	// Setup the font
 	f = createFont("Arial", 10, true);
 	textFont(f);
+
+	description = "Index ranking the ability to build and nurture financial saving and retirement assets. Factors include: Savings propensity (proportion of households in the area that have a savings product of any type — e.g., regular savings account, CD, IRA); 401(k) retirement plan penetration; Non-401(k) retirement savings plan penetration (e.g., pension plans); Investing propensity (proportion of households in the area that have any investment product or service, excluding 401(k) plans); Net worth; Owner-occupied housing value; First mortgage balance; Personal debt level; Home ownership; Household income, Cost of living; Local employment rate.";
 
 	// Get the data
 	data = new Table("nestegg-index");
@@ -69,13 +69,18 @@ void draw() {
 	fill(0);
 	textSize(35);
 	textAlign(CENTER);
-	text("2012 U.S. Savings by State", width/2, 50);
+	text("U.S. Savings by State", width/2, 50);
+
+	// Draw the description
+	textSize(10);
+	textAlign(LEFT);
+	text(description, width-width/4, height-260, 250, 250);
 
 	// Draw the Source Text
 	fill(#777777);
 	textSize(10);
 	textAlign(LEFT);
-	text("Source: A.G. Edwards Nest Egg Index", 15, height-15);
+	text("Source: Nest Egg Index by state, A.G. Edwards.", 15, height-15);
 
 	// Draw the scale
 	cscale.draw(int(us.width)/2+60, int(us.height)-15);

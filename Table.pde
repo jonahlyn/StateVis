@@ -41,7 +41,7 @@ class Table {
         return i;
       }
     }
-    println("No row named '" + name + "' was found");
+    //println("No row named '" + name + "' was found");
     return -1;
   }
   
