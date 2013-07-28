@@ -11,15 +11,7 @@
 			"file": "StateVisualization.pde",
 			"settings":
 			{
-				"buffer_size": 432,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "data/Blank_US_Map.svg",
-			"settings":
-			{
-				"buffer_size": 61609,
+				"buffer_size": 4459,
 				"line_ending": "Unix"
 			}
 		}
@@ -49,6 +41,9 @@
 	"file_history":
 	[
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/readme.txt",
+		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/StateVisualization.pde",
+		"/Users/jonahlyngilstrap/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/data/Blank_US_Map.svg",
+		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/gsp_stater.xls",
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/data/Blank_US_Map.svg",
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Code Samples/VisualizingDataBook/ch03-usmap/step03_fig3_red_to_blue/step03_fig3_red_to_blue.pde",
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Code Samples/VisualizingDataBook/ch03-usmap/step03_fig3_red_to_blue/Table.pde",
@@ -188,7 +183,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -196,50 +191,25 @@
 					"file": "StateVisualization.pde",
 					"settings":
 					{
-						"buffer_size": 432,
+						"buffer_size": 4459,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								432,
-								432
+								1264,
+								1264
 							]
 						],
 						"settings":
 						{
 							"auto_name": "",
-							"syntax": "Packages/Processing/Syntax/Processing.tmLanguage"
+							"syntax": "Packages/Processing/Syntax/Processing.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "data/Blank_US_Map.svg",
-					"settings":
-					{
-						"buffer_size": 61609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15081,
-								15081
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1521.0,
+						"translation.y": 269.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -280,7 +250,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 377.0
+		"height": 100.0
 	},
 	"replace":
 	{
