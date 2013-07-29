@@ -7,14 +7,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "StateVisualization.pde",
-			"settings":
-			{
-				"buffer_size": 4459,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Processing/Processing.sublime-build",
 	"command_palette":
@@ -40,6 +32,8 @@
 	},
 	"file_history":
 	[
+		"/Users/jonahlyngilstrap/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/StateVisualization.pde",
+		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/data/main.py",
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/readme.txt",
 		"/Users/jonahlyn/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/StateVisualization.pde",
 		"/Users/jonahlyngilstrap/Dropbox/0-Working/Classwork/Creative Programming/Project Ideas/StateVisualization/data/Blank_US_Map.svg",
@@ -183,37 +177,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "StateVisualization.pde",
-					"settings":
-					{
-						"buffer_size": 4459,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1264,
-								1264
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Processing/Syntax/Processing.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 269.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

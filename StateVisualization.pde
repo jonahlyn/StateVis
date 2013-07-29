@@ -153,6 +153,14 @@ void draw() {
 }
 
 
+void mousePressed() {
+
+  // Save a screen capture
+  saveFrame("statevis.png");
+
+}
+
+
 class ColorScale {
 	float min, max;
 	int x, y;
